@@ -1,8 +1,6 @@
 {
   "lint-staged": {
-    "**/*.ts": [
-      "gts fix"
-    ]
+    "*.{ts,tsx}": "eslint --fix"
   },
   "prisma": {
     "seed": "tsx seed.ts"
@@ -31,7 +29,6 @@
   "description": "",
   "devDependencies": {
     "@types/node": "^22.15.30",
-    "gts": "^6.0.2",
     "husky": "^9.1.7",
     "lint-staged": "^16.1.0",
     "prisma": "^6.9.0",

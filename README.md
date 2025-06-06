@@ -461,28 +461,15 @@ X-Powered-By: Express
     "updatedAt": "2025-06-06T17:52:10.255Z"
 }
 
-## 14. add gts
+## 15. Get eslint antfu
+
+should be enough to cover both prettier and eslint
 
 ```bash
-npm i --save-dev gts
-npx gts init
+npm install --save-dev eslint @antfu/eslint-config
 ```
 
-GTS (Google TypeScript Style) is basically a batteries-included setup for TypeScript projects that bundles:
-
-    Pre-configured linting rules (ESLint)
-
-    Formatting with Prettier integrated
-
-    Easy automatic fixes and code style enforcement
-
-    Pre-made Git hooks integration (via Husky and lint-staged) so it “just works” out of the box
-
-If you are prompted with downgrading dep, just say no, most of them should be backward compatible
-
-But if you are prompted for config overwrite, say yes when you have not edited it
-
-## 15. add husky and lint-staged
+## 16. add husky and lint-staged
 
 1. husky will decide what to run on commit, tell it to run lint staged
 2. lint staged targets staged files, tell it to do gts fix and git add to them
@@ -506,9 +493,7 @@ tell lint-staged what to do on staged files in package.json
 ```json
 {
   "lint-staged": {
-    "**/*.ts": [
-      "gts fix"
-    ]
+    "*.{ts,tsx}": "eslint --fix"
   },
   "prisma": {
     "seed": "tsx seed.ts"
@@ -537,7 +522,6 @@ tell lint-staged what to do on staged files in package.json
   "description": "",
   "devDependencies": {
     "@types/node": "^22.15.30",
-    "gts": "^6.0.2",
     "husky": "^9.1.7",
     "lint-staged": "^16.1.0",
     "prisma": "^6.9.0",
@@ -550,3 +534,4 @@ tell lint-staged what to do on staged files in package.json
   }
 }
 ```
+
