@@ -3,7 +3,7 @@
     "*.{ts,tsx}": "eslint --fix"
   },
   "prisma": {
-    "seed": "tsx seed.ts"
+    "seed": "tsx prisma/seed.ts"
   },
   "name": "crud-for-yt-video-testing-the-app",
   "version": "1.0.0",

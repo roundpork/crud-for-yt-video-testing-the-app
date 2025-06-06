@@ -205,7 +205,7 @@ Add script seed
 ```json
 {
 	"prisma": {
-		"seed": "tsx seed.ts"	
+		"seed": "tsx prisma/seed.ts"	
 	},
   "name": "crud-for-yt-video-testing-the-app",
   "version": "1.0.0",
@@ -341,7 +341,7 @@ app.listen(3000, () => console.log('Server running at http://localhost:3000'));
 ```json
 {
 	"prisma": {
-		"seed": "tsx seed.ts"	
+		"seed": "tsx prisma/seed.ts"	
 	},
   "name": "crud-for-yt-video-testing-the-app",
   "version": "1.0.0",
@@ -496,7 +496,7 @@ tell lint-staged what to do on staged files in package.json
     "*.{ts,tsx}": "eslint --fix"
   },
   "prisma": {
-    "seed": "tsx seed.ts"
+    "seed": "tsx prisma/seed.ts"
   },
   "name": "crud-for-yt-video-testing-the-app",
   "version": "1.0.0",
