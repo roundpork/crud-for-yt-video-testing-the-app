@@ -481,3 +481,73 @@ GTS (Google TypeScript Style) is basically a batteries-included setup for TypeSc
 If you are prompted with downgrading dep, just say no, most of them should be backward compatible
 
 But if you are prompted for config overwrite, say yes when you have not edited it
+
+## 15. add husky and lint-staged
+
+1. husky will decide what to run on commit, tell it to run lint staged
+2. lint staged targets staged files, tell it to do gts fix and git add to them
+
+Get husky and lint-staged
+```bash
+npm install --save-dev husky lint-staged
+```
+
+Tell husky to create its config file (.husky/pre-commit)
+```bash
+npx husky init
+```
+
+config husky to run lint-staged
+```
+npx lint-staged
+```
+
+tell lint-staged what to do on staged files in package.json
+```json
+{
+  "lint-staged": {
+    "**/*.ts": [
+      "gts fix",
+      "git add"
+    ]
+  },
+  "prisma": {
+    "seed": "tsx seed.ts"
+  },
+  "name": "crud-for-yt-video-testing-the-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "gts lint",
+    "clean": "gts clean",
+    "compile": "tsc",
+    "fix": "gts fix",
+    "prepare": "husky",
+    "pretest": "npm run compile",
+    "posttest": "npm run lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com-roundpork:roundpork/crud-for-yt-video-testing-the-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^22.15.30",
+    "gts": "^6.0.2",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.0",
+    "prisma": "^6.9.0",
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.9.0",
+    "express": "^5.1.0"
+  }
+}
+```
