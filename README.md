@@ -507,8 +507,7 @@ tell lint-staged what to do on staged files in package.json
 {
   "lint-staged": {
     "**/*.ts": [
-      "gts fix",
-      "git add"
+      "gts fix"
     ]
   },
   "prisma": {

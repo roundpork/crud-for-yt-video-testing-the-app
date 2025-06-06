@@ -1,8 +1,7 @@
 {
   "lint-staged": {
     "**/*.ts": [
-      "gts fix",
-      "git add"
+      "gts fix"
     ]
   },
   "prisma": {
