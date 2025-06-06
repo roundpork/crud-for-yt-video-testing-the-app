@@ -1,5 +1,12 @@
 # Steps taken to build this
 
+## 0. One line bash automation to start backend
+
+```bash
+chmod +x reset-docker.sh
+./reset-docker.sh
+```
+
 ## 1. init npm
 
 ```bash
@@ -533,5 +540,48 @@ tell lint-staged what to do on staged files in package.json
     "express": "^5.1.0"
   }
 }
+```
+
+## 17. make bash setup automation (reset-docker.sh)
+
+Probably best to auto install dependencies, but im too lazy to do that here
+
+```bash
+#!/bin/bash
+
+echo "⚠️ WARNING: This script will stop Docker, remove ALL containers, images, volumes, and networks."
+echo "Any data not persisted outside Docker will be lost."
+echo
+read -p "Are you SURE you want to continue? (yes/[no]) " confirm
+
+if [[ "$confirm" != "yes" ]]; then
+  echo "Aborting. No changes made."
+  exit 1
+fi
+
+echo "👉 Shutting down docker-compose..."
+docker-compose down
+
+echo "🛑 Stopping Docker service..."
+sudo systemctl stop docker.service
+
+echo "🧹 Cleaning up Docker..."
+docker container prune -f
+docker image prune -a -f
+docker system prune -a --volumes -f
+
+echo "✅ Starting Docker service..."
+sudo systemctl start docker.service
+
+echo "🚀 Starting docker-compose..."
+docker-compose up -d
+
+echo "🧬 Running Prisma commands..."
+npx prisma db push
+npx prisma generate
+npx prisma db seed
+
+echo "🔧 Starting dev server..."
+npm run dev
 ```
 
